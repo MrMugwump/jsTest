@@ -1,4 +1,6 @@
-class EquationGenerator {
+
+
+export class EquationGenerator {
     firstVar: number;
     secondVar: number;
     answer: number;
@@ -9,14 +11,15 @@ class EquationGenerator {
         this.answer = 0;
         
         this.#generateNumbers();
-        this.#generateOperation();
+        this.generateOperation();
+        console.log("what")
     }
     #generateNumbers(){
         this.firstVar = generateRandomInteger(0,10);
         this.secondVar = generateRandomInteger(0,10);
     }
 
-    #generateOperation(){
+    generateOperation(){
         switch(generateRandomInteger(1,4)){
             case 1:
                 this.operation = Operations.Plus;
@@ -39,11 +42,8 @@ class EquationGenerator {
         
     }
     getEquation() {
-        var stringTest = this.firstVar.toString as unknown as string;
-        var stringTest2 = this.secondVar.toString as unknown as string;
-        var answerString = this.answer.toString as unknown as string;
-
-        return(''.concat(stringTest, this.operation, stringTest2,'=',answerString));
+        let equationString = '' + this.firstVar + this.operation+this.secondVar + '=' + this.answer;
+        return(equationString);
     }
     getAnswer(){
         return(this.answer);

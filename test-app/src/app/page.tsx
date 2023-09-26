@@ -1,22 +1,26 @@
 'use client'
 import Image from 'next/image'
 import { Key, useState } from 'react';
-import '../app/generateEquation'
+import { EquationGenerator } from './generateEquation';
+
 
 export default function Home() {
   const [textInput, setText] = useState('');
   const [enterKey, onEnter] = useState('');
   const [mathEquation, changeEquation] = useState('1+1 = 2');
 
+
   const equationGenerator = new EquationGenerator();
 
   function enterKeyHeard(e: string){
-    if(e === 'Enter'){
+    if(e == 'Enter'){
+        //equationGenerator.generateOperation();
         onEnter('Enter Key Heard');
+        console.log("what");
+        changeEquation(equationGenerator.getEquation());
     }
     else{
-      var code = e;
-      onEnter("yessir " + code);
+      onEnter("Enter Key Not Heard");
     }
   }
   return (
@@ -61,10 +65,10 @@ export default function Home() {
       }
       <hr />
       { enterKey !== '' &&
-        <p>fjjf {enterKey}</p>
+        <p>{enterKey}</p>
       }
       <hr />
-      <p>{equationGenerator.getEquation()}</p>
+      <p>{mathEquation}</p>
       
     </>
   );
