@@ -3,6 +3,38 @@ import Image from 'next/image'
 import { Key, useState } from 'react';
 import { EquationGenerator } from './generateEquation';
 
+/**
+ * Contains answerInput in hierarchy
+ * This allows answerInput to get shuffled around
+ */
+function equationDisplay(){ 
+  const equationGenerator = new EquationGenerator();
+  const [textInput, setText] = useState('');
+  const [mathEquation, changeEquation] = useState(String(equationGenerator.generateOperation()));
+
+  function keyDetect(e: string){
+    if( e == 'Enter'){
+      
+    }
+  }
+
+  return(
+  <>
+    <p>{mathEquation}</p> {/*will likely store these in a list so that the order of things is easily moved around*/}
+    <input 
+      name="answer"
+      value={textInput}
+      onKeyDown={e => keyDetect(e.key)}
+      onChange={e=>setText(e.target.value)}
+    />
+  </>
+  );
+
+}
+
+function answerInput(){
+
+}
 
 export default function Home() {
   const [textInput, setText] = useState('');
