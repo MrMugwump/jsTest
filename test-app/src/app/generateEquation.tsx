@@ -48,6 +48,11 @@ export class EquationGenerator {
     getAnswer(){
         return(this.answer);
     }
+    generateEquation(){
+        this.#generateNumbers();
+        this.generateOperation();
+        return(this.getEquation());
+    }
 }
 
 function generateRandomInteger(min: number, max: number){ // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random

@@ -7,33 +7,50 @@ import { EquationGenerator } from './generateEquation';
  * Contains answerInput in hierarchy
  * This allows answerInput to get shuffled around
  */
-function equationDisplay(){ 
+function EquationDisplay({}){ 
   const equationGenerator = new EquationGenerator();
-  const [textInput, setText] = useState('');
   const [mathEquation, changeEquation] = useState(String(equationGenerator.generateOperation()));
 
-  function keyDetect(e: string){
-    if( e == 'Enter'){
-      
-    }
+  const columns = [];
+  
+  columns.push(<td>{equationGenerator.firstVar}</td>);
+  columns.push(<td>{equationGenerator.operation}</td>);
+  columns.push(<td>{equationGenerator.secondVar}</td>);
+
+  function generateEquation(){
+    equationGenerator.generateEquation();
+    columns.push(<td>{equationGenerator.firstVar}</td>);
+    columns.push(<td>{equationGenerator.operation}</td>);
+    columns.push(<td>{equationGenerator.secondVar}</td>);
+    changeEquation(equationGenerator.getEquation()); //it needs a useState somewhere in order to know to run this
   }
 
-  return(
-  <>
-    <p>{mathEquation}</p> {/*will likely store these in a list so that the order of things is easily moved around*/}
-    <input 
-      name="answer"
-      value={textInput}
-      onKeyDown={e => keyDetect(e.key)}
-      onChange={e=>setText(e.target.value)}
-    />
-  </>
-  );
+  return(<>
+    <tbody>
+      <tr>
+        {columns}
+        <td>=</td>
+        <td><AnswerInput equationGenerator={generateEquation}/></td>
+        </tr>
+    </tbody>
+    <p></p> {/*will likely store these in a list so that the order of things is easily moved around*/}
+
+  </>);
 
 }
 
-function answerInput(){
+function AnswerInput({ equationGenerator }:any){
+  function keyDetect(e: string){
+    if( e == 'Enter'){
+      equationGenerator();
+    }
+  }
 
+  return(<><input 
+    name="answer"
+    onKeyDown={e => keyDetect(e.key)}
+  /> 
+  </>);
 }
 
 export default function Home() {
@@ -57,51 +74,7 @@ export default function Home() {
   }
   return (
     <>
-      <label>
-        Text input: 
-        <input 
-          name="myInput"
-          value = {textInput}
-          onChange={e => setText(e.target.value)}
-          onKeyDown={e =>
-            enterKeyHeard(e.key)}
-        />
-      </label>
-      <hr />
-      <label>
-        Checkbox: <input type="checkbox" name="myCheckbox" />
-      </label>
-      <hr />
-      <p>
-        Radio buttons:
-        <hr />
-        <label>
-          <input type="radio" name="myRadio" value="option1" />
-          Option 1
-        </label>
-        <hr />
-        <label>
-          <input type="radio" name="myRadio" value="option2" />
-          Option 2
-        </label>
-        <hr />
-        <label>
-          <input type="radio" name="myRadio" value="option3" />
-          Option 3
-        </label>
-      </p>
-      <hr />
-      {
-        textInput !== '' && 
-        <p>Your text input is {textInput}</p>
-      }
-      <hr />
-      { enterKey !== '' &&
-        <p>{enterKey}</p>
-      }
-      <hr />
-      <p>{mathEquation}</p>
-      
+      <EquationDisplay/>
     </>
   );
 }
