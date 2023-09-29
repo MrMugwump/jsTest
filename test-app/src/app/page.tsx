@@ -22,7 +22,8 @@ function EquationDisplay({}){
     columns.push(<td>{equationGenerator.firstVar}</td>);
     columns.push(<td>{equationGenerator.operation}</td>);
     columns.push(<td>{equationGenerator.secondVar}</td>);
-    changeEquation(equationGenerator.getEquation()); //it needs a useState somewhere in order to know to run this
+    useState();
+    //changeEquation(equationGenerator.getEquation()); //it needs a useState somewhere in order to know to run this
   }
 
   return(<>
