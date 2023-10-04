@@ -56,7 +56,6 @@ export class EquationGenerator {
 }
 
 function generateRandomInteger(min: number, max: number){ // Taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-
     min = Math.ceil(min);
     max = Math.floor(max)+1; //+1 to make max inclusive inclusive
     return Math.floor(Math.random() * (max - min) + min); // The maximum and the minimum are inclusive

@@ -19,3 +19,18 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+.button1 {
+  background-color: #4CAF50;
+}
+.button1:hover {
+  background-color: #0e8d12;
+}
+
+.answerInput {
+  background-color: aqua;
+}
+
+.button2{
+  background-color: aquamarine;
+}
