@@ -3,9 +3,8 @@ import Image from 'next/image'
 import React from "react"
 import { useState, useEffect } from 'react';
 import { EquationGenerator } from './generateEquation';
+import {useTimer} from './timer';
 import TimerModule from './timer';
-import useTimer from './timer';
-
 /**
  * Contains answerInput in hierarchy
  * This allows answerInput to get shuffled around
@@ -76,41 +75,44 @@ const tenSECOND = 1_000*10;
 export default function Home() {
   var time = new Date();
 
-  const { days, hours, minutes, seconds } = useTimer(time);
-  const [timespan, setTimespan] = useState(time.getTime()- Date.now());
+  let timeOffset = 10;
+  const [timespan, setTimespan] = useState(10000);
+  const [deadline, setDeadline] = useState(new Date());
+  const [timerLength, setTimerLength] = useState(10000);
+  const [interval, setInterval] = useState(1000);
+  const [timeEnded, setTimeEnded] = useState(false);
+  const {seconds} = useTimer(time,10000);
+  //let seconds = timer(time,10000);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimespan((_timespan) => _timespan - tenSECOND);
-    }, tenSECOND);
+  const getTimerLength = () =>{
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [tenSECOND]);
-
-
-  const [textInput, setText] = useState('');
-  const [enterKey, onEnter] = useState('');
-  const [mathEquation, changeEquation] = useState('1+1 = 2');
-
-
+  }
   const equationGenerator = new EquationGenerator();
 
+  useEffect(()=>{
+    if(seconds<0){
+    }
+  }, [seconds]); // triggers every time seconds changes
+
   function enterKeyHeard(e: string){
-    if(e == 'Enter'){
-        //equationGenerator.generateOperation();
-        onEnter('Enter Key Heard');
-        console.log("what");
-        changeEquation(equationGenerator.getEquation());
-    }
-    else{
-      onEnter("Enter Key Not Heard");
-    }
+    // if(e == 'Enter'){
+    //     //equationGenerator.generateOperation();
+    //     onEnter('Enter Key Heard');
+    //     //console.log("what");
+    //     changeEquation(equationGenerator.getEquation());
+    // }
+    // else{
+    //   onEnter("Enter Key Not Heard");
+    // }
   }
   return (
     <> 
       <div>{seconds}</div>
+      <TimerModule 
+        deadline = {deadline}
+        timerLength={timerLength}
+        interval={interval}
+        timeEnded={timeEnded}/>
       <hr/>
       <button className='button button1'>skdjfhsdk</button>
       <hr/>
