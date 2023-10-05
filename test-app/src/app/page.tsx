@@ -1,7 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { Key, useState } from 'react';
+import React from "react"
+import { useState, useEffect } from 'react';
 import { EquationGenerator } from './generateEquation';
+import TimerModule from './timer';
+import useTimer from './timer';
 
 /**
  * Contains answerInput in hierarchy
@@ -69,8 +72,24 @@ function AnswerInput({ equationGenerator }:any){
   /> 
   </>);
 }
-
+const tenSECOND = 1_000*10;
 export default function Home() {
+  var time = new Date();
+
+  const { days, hours, minutes, seconds } = useTimer(time);
+  const [timespan, setTimespan] = useState(time.getTime()- Date.now());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimespan((_timespan) => _timespan - tenSECOND);
+    }, tenSECOND);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [tenSECOND]);
+
+
   const [textInput, setText] = useState('');
   const [enterKey, onEnter] = useState('');
   const [mathEquation, changeEquation] = useState('1+1 = 2');
@@ -90,8 +109,8 @@ export default function Home() {
     }
   }
   return (
-    <>
-
+    <> 
+      <div>{seconds}</div>
       <hr/>
       <button className='button button1'>skdjfhsdk</button>
       <hr/>
