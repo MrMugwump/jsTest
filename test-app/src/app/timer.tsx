@@ -26,7 +26,12 @@ export default function TimerModule({deadline, timerLength, interval, timeEnded}
     useEffect(()=>{
         const intervalId = setInterval(()=>{
             setTimespan((_timespan)=>{
-                return _timespan - ourInterval*0.1;
+                if(_timespan < 0){
+                  return timerLength;
+                }
+                else{
+                  return _timespan - interval*0.1;
+                }
             });
         }, ourInterval*0.1);
 
@@ -34,8 +39,13 @@ export default function TimerModule({deadline, timerLength, interval, timeEnded}
         
     },[ourInterval]);
 
+    useEffect(()=>{
+        setTimespan(-1);
+        // return ()=>setTimespan(-21);
+    },[timeEnded]);
+
     return(
-        <><p>{timespan/SECOND}</p></>
+        <><p>{timespan} + {timeEnded}</p></>
     );
 }
 
