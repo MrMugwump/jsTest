@@ -26,26 +26,26 @@ export default function TimerModule({deadline, timerLength, interval, timeEnded}
     useEffect(()=>{
         const intervalId = setInterval(()=>{
             setTimespan((_timespan)=>{
-                if(_timespan < 0){
+                if(_timespan <= 0){
                   return timerLength;
                 }
                 else{
                   return _timespan - interval*0.1;
                 }
             });
-        }, ourInterval*0.1);
+        }, interval*0.1);
 
         return () => {clearInterval(intervalId)}
         
-    },[ourInterval]);
+    },[interval]);
 
     useEffect(()=>{
-        setTimespan(-1);
+        setTimespan(timerLength);
         // return ()=>setTimespan(-21);
     },[timeEnded]);
 
     return(
-        <><p>{timespan} + {timeEnded}</p></>
+        <><p>{timespan/SECOND}</p></>
     );
 }
 
@@ -59,7 +59,7 @@ export function useTimer(deadline:Date, timerLength:number, interval = SECOND) {
   useEffect(() => {
     const intervalId = setInterval(() => {
         setTimespan((_timespan) => {
-            if(_timespan<0){
+            if(_timespan<=0){
                 return timeL; //resets the timer if time finishes
             }
             else{
