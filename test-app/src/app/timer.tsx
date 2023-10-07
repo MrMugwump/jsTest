@@ -18,10 +18,10 @@ const DAY = HOUR * 24;
 
 export default function TimerModule({deadline, timerLength, interval, timeEnded}:any){
     var date = new Date(deadline);
-    const [timespan,setTimespan] = useState(timerLength + date.getTime() - Date.now());
+    const [timespan,setTimespan] = useState(timerLength);
     useEffect(()=>{
         const intervalId = setInterval(()=>{
-            setTimespan((_timespan)=>{
+            setTimespan((_timespan: number)=>{
                 if(_timespan <= 0){
                   return timerLength;
                 }
@@ -50,7 +50,7 @@ export function useTimer(deadline:Date, timerLength:number, interval = SECOND) {
     //let timeEnded = timeEnd()
     let timeL = timerLength;
     let date  = new Date(deadline);
-    const [timespan, setTimespan] = useState(timerLength+date.getTime()- Date.now());
+    const [timespan, setTimespan] = useState(timerLength);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
