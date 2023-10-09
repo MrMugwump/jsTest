@@ -109,7 +109,6 @@ export default function Home() {
     <> 
       <div>{seconds}</div>
       <TimerModule 
-        deadline = {deadline}
         timerLength={timerLength}
         interval={interval}
         timeEnded={timeEnded}/>
