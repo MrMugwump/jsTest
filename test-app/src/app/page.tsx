@@ -24,7 +24,7 @@ function EquationDisplay({}){
   columns.push(thing);
 
   function generateEquation(){
-    useState();
+    //useState();
     equationGenerator.generateEquation();
     
     let x = generateRandomInteger(0,3);
