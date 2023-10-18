@@ -1,13 +1,13 @@
 /* code modified from https://codepen.io/bjornholdt/pen/zZyEga*/
 .progressbar .progress {
-    /* position: absolute;
-    bottom: 0; */ 
+    position: absolute;
+    bottom: 0;
     background-color: green;
     border-radius: 4px;
     transition: height linear;
     text-align: center;
     margin: auto;
-    transition-duration: 1ms;
+    /* transition-duration: 1ms; */
     width: 100%;
   }
   
